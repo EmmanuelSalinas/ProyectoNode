@@ -68,9 +68,6 @@ pokemon.patch("/:id([0-9]{1,3})",  async(req, res, next) =>{
     return res.status(500).json({code:500, message:"Campos incompletos"});
 });
 
-
-
-
 pokemon.get('/' , async(req,res,next)=>{
     const pkmn = await bd.query("SELECT * FROM pokemon"); 
     return res.status(200).json({code: 200 , message: pkmn});
@@ -90,18 +87,6 @@ pokemon.get('/:id([0-9]{1,4})',async(req, res, next)=>{
         return res.status(404).send({code: 404, message: "Pokemón no encontrado"});
     }
 });
-
-/*
-pokemon.get('/:id([0-9]{1,3})',(req, res, next)=>{
-    const id = req.params.id-1;
-    if(id >= 0 && id <= 150){
-        res.status(200).send(pk[req.params.id - 1 ]);
-    }
-    else{
-        res.status(404).send("Pokemón no encontrado");
-    }
-});
-*/
 
 pokemon.get('/:name([A-Za-z]+)', async(req,  res, next)=>{
     const name = req.params.name;
@@ -133,6 +118,21 @@ pokemon.get('/:name([A-Za-z]+)', async(req,  res, next)=>{
 });
 
 module.exports= pokemon;
+
+
+
+/*
+pokemon.get('/:id([0-9]{1,3})',(req, res, next)=>{
+    const id = req.params.id-1;
+    if(id >= 0 && id <= 150){
+        res.status(200).send(pk[req.params.id - 1 ]);
+    }
+    else{
+        res.status(404).send("Pokemón no encontrado");
+    }
+});
+*/
+
 
 /*
 tipos de metodos en REST:

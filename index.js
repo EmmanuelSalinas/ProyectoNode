@@ -2,7 +2,9 @@
 const morgan = require('morgan');
 const express = require('express');   //aqui se importa la libreria express
 const app = express();  //se crea una instancia 
-const pokemon = require('./routes/pokemon')
+const pokemon = require('./routes/pokemon');
+const user = require('./routes/user');
+
 
 app.use(morgan('dev'));
 app.use(express.json());
@@ -15,6 +17,7 @@ app.get("/" , (req, res ,next) =>{
 });
 
 app.use("/pokemon", pokemon);
+app.use("/user",user);
 
 
 app.use((req , res , next)=>{
