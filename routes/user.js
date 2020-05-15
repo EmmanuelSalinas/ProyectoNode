@@ -3,9 +3,7 @@ const jwt= require('jsonwebtoken');
 const user = express.Router();
 const db = require('../config/database');
 
-
-
-user.post("/",async(req,res,next)=>{
+user.post("/signin",async(req,res,next)=>{
     const {user_name, user_mail, user_password} = req.body;
 
     if(user_name && user_mail && user_password){
@@ -21,7 +19,6 @@ user.post("/",async(req,res,next)=>{
     return res.status(500).json({code:500, message:"Campos incompletosm"})
 });
 
-
 user.post("/login", async(req,res,next)=>{
     const{user_mail, user_password}=req.body;
     const query = `SELECT * FROM user WHERE user_mail='${user_mail}' AND user_password= '${user_password}';`;
@@ -32,12 +29,12 @@ user.post("/login", async(req,res,next)=>{
             const token = jwt.sign({
                 user_id: rows[0].user_id,
                 user_mail: rows[0].user_mail
-            }, "debugkey")
+            }, "debugkey");
 
             return res.status(200).json({code:200, message:token});
         }
         else{
-            return res.status(401).json({code:401, message:"Usuario y/o Contraseña incorrecta"})
+            return res.status(401).json({code:401, message:"Usuario y/o Contraseña incorrecta"});
         }
     }
     else{
@@ -46,7 +43,6 @@ user.post("/login", async(req,res,next)=>{
 
     
 });
-
 
 user.get("/", async(req, res, next)=>{
     const query = "SELECT * FROM user;";
