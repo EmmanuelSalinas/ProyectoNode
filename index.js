@@ -6,11 +6,15 @@ const app = express();  //se crea una instancia
     //Routers
 const pokemon = require('./routes/pokemon');
 const user = require('./routes/user');
+
     //middleware
+
 const auth = require('./middleware/auth');
 const notFound = require('./middleware/notFound');
 const index = require('./middleware/index');
+const cors = require('./middleware/cors');
 
+app.use(cors);
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended : true }));
