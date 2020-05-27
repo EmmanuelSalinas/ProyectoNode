@@ -21,7 +21,9 @@ app.use(express.urlencoded({extended : true }));
 //app.use(bodyParser.json());
 //app.use(bodyParser.urlencoded({extended: true}));
 
-app.get("/" , index);
+app.get("/" , (req,res,next)=>{
+    res.status(200).send("Hola");
+});
 app.use("/user",user);
 app.use(auth);
 app.use("/pokemon", pokemon);
